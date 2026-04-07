@@ -1,0 +1,97 @@
+name: CI
+
+on:
+  push:
+    branches: ["**"]
+  pull_request:
+    branches: [main]
+
+# Cancel in-progress runs for the same ref when a new push arrives.
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  rust-tests:
+    name: Rust tests (${{ matrix.name }})
+    runs-on: windows-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: i18n
+            crate: libs/i18n
+            needs_sidecars: false
+          - name: callback-popup
+            crate: callback-popup
+            needs_sidecars: false
+          - name: tel-handler
+            crate: tel-handler
+            needs_sidecars: false
+          - name: desktop-client
+            crate: desktop-client/src-tauri
+            extra: --lib
+            needs_sidecars: true
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Install Rust toolchain
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Cache cargo build
+        uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: ${{ matrix.crate }}
+
+      # Tauri's build script verifies that every entry in `externalBin`
+      # exists on disk. For unit tests we don't need real sidecars, just
+      # files that exist — empty placeholders are enough.
+      - name: Stage placeholder sidecars
+        if: matrix.needs_sidecars
+        shell: pwsh
+        run: |
+          $dest = "desktop-client/src-tauri/binaries"
+          New-Item -ItemType Directory -Force -Path $dest | Out-Null
+          New-Item -ItemType File -Force -Path "$dest/callback-popup-x86_64-pc-windows-msvc.exe" | Out-Null
+          New-Item -ItemType File -Force -Path "$dest/tel-handler-x86_64-pc-windows-msvc.exe" | Out-Null
+
+      - name: cargo test
+        working-directory: ${{ matrix.crate }}
+        run: cargo test ${{ matrix.extra }}
+
+  rust-fmt:
+    name: cargo fmt --check
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          components: rustfmt
+      - name: Check formatting (libs/i18n)
+        working-directory: libs/i18n
+        run: cargo fmt --all -- --check
+      - name: Check formatting (callback-popup)
+        working-directory: callback-popup
+        run: cargo fmt --all -- --check
+      - name: Check formatting (tel-handler)
+        working-directory: tel-handler
+        run: cargo fmt --all -- --check
+      - name: Check formatting (desktop-client)
+        working-directory: desktop-client/src-tauri
+        run: cargo fmt --all -- --check
+
+  frontend-tests:
+    name: Frontend tests (vitest)
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: desktop-client
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version: "20"
+          cache: npm
+          cache-dependency-path: desktop-client/package-lock.json
+      - run: npm ci
+      - run: npm test

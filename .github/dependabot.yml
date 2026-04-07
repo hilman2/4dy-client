@@ -1,0 +1,18 @@
+# Reduced Dependabot config: only GitHub Actions, monthly schedule.
+#
+# Cargo and npm bumps are handled locally via `scripts/update-deps.sh`
+# (or `.ps1`). Dependabot would otherwise create a flood of individual
+# PRs every week, each triggering its own CI run, which is slower and
+# noisier than running `cargo update` / `npm update` once locally and
+# pushing a single commit.
+#
+# Action bumps stay automated because they are infrequent, low-risk,
+# and sometimes carry security fixes (e.g. actions/checkout CVEs)
+# that we want to be reminded of without having to remember.
+version: 2
+updates:
+  - package-ecosystem: github-actions
+    directory: "/"
+    schedule:
+      interval: monthly
+    open-pull-requests-limit: 3

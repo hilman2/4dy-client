@@ -1,0 +1,29 @@
+[package]
+name = "fourdy-tel-handler"
+version = "0.1.0"
+edition = "2021"
+description = "Standalone tel: protocol handler that forwards numbers to the 4dy desktop client"
+authors = ["Manuel Hilgert"]
+license = "MIT"
+repository = "https://github.com/hilman2/4dy-client"
+
+[[bin]]
+name = "tel-handler"
+path = "src/main.rs"
+
+[dependencies]
+regex = "1"
+fourdy-i18n = { path = "../libs/i18n" }
+
+[dependencies.windows]
+version = "0.62"
+features = [
+    "Win32_Foundation",
+    "Win32_UI_Input_KeyboardAndMouse",
+    "Win32_System_DataExchange",
+    "Win32_System_Memory",
+]
+
+[profile.release]
+opt-level = "s"
+lto = true

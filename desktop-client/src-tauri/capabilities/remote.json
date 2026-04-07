@@ -1,0 +1,28 @@
+{
+  "identifier": "remote-webclient",
+  "description": "Capabilities for the external web-client webview",
+  "windows": ["webclient"],
+  "remote": {
+    "urls": ["https://*", "http://*"]
+  },
+  "permissions": [
+    "core:default",
+    "core:window:default",
+    "core:window:allow-show",
+    "core:window:allow-hide",
+    "core:window:allow-set-focus",
+    "core:window:allow-close",
+    "core:window:allow-maximize",
+    "core:window:allow-minimize",
+    "core:window:allow-inner-size",
+    "core:window:allow-outer-position",
+    "core:window:allow-is-maximized",
+    "core:webview:default",
+    "clipboard-manager:allow-read-text",
+    "clipboard-manager:allow-write-text",
+    "shell:allow-open",
+    "notification:allow-notify",
+    "notification:allow-request-permission",
+    "notification:allow-is-permission-granted"
+  ]
+}

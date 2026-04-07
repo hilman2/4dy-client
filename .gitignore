@@ -1,0 +1,30 @@
+# Rust
+**/target/
+
+# Node
+**/node_modules/
+**/dist/
+
+# Tauri generated schemas (auto-regenerated on build)
+desktop-client/src-tauri/gen/
+
+# Sidecar binaries (built from callback-popup and tel-handler)
+desktop-client/src-tauri/binaries/*.exe
+desktop-client/src-tauri/binaries/*.pdb
+
+# IDE / editors
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Logs
+*.log
+
+# OS
+Thumbs.db
+.DS_Store
+
+# Test / coverage output
+coverage/
+.nyc_output/

@@ -1,0 +1,10 @@
+[package]
+name = "fourdy-i18n"
+version = "0.1.0"
+edition = "2021"
+description = "Internal i18n strings shared between the 4dy desktop client crates"
+authors = ["Manuel Hilgert"]
+license = "MIT"
+repository = "https://github.com/hilman2/4dy-client"
+
+[dependencies]

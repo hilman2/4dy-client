@@ -1,0 +1,48 @@
+[package]
+name = "fourdy-client"
+version = "0.1.0"
+description = "Lightweight Tauri-based desktop wrapper for 3CX phone systems"
+authors = ["Manuel Hilgert"]
+edition = "2021"
+license = "MIT"
+repository = "https://github.com/hilman2/4dy-client"
+readme = "../../README.md"
+
+[lib]
+name = "fourdy_client_lib"
+crate-type = ["staticlib", "cdylib", "rlib"]
+
+[build-dependencies]
+tauri-build = { version = "2", features = [] }
+
+[dependencies]
+tauri = { version = "2", features = ["tray-icon", "webview-data-url", "image-png"] }
+tauri-plugin-global-shortcut = "2"
+tauri-plugin-clipboard-manager = "2"
+tauri-plugin-shell = "2"
+tauri-plugin-notification = "2"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+dirs = "6"
+regex = "1"
+url = "2"
+notify-rust = "4"
+urlencoding = "2"
+fourdy-i18n = { path = "../../libs/i18n" }
+
+# NOTE: webview2-com and windows versions are pinned to whatever
+# tauri 2.10.x's transitive `webview2-com-sys` uses. Bumping past
+# these without a matching tauri release causes a windows-core 0.61
+# vs 0.62 conflict in the dependency graph (see Dependabot PRs #7/#8).
+[target.'cfg(windows)'.dependencies]
+webview2-com = "0.38"
+
+[target.'cfg(windows)'.dependencies.windows]
+version = "0.61"
+features = [
+    "Win32_Foundation",
+    "Win32_UI_WindowsAndMessaging",
+    "Win32_UI_Input_KeyboardAndMouse",
+    "Win32_System_DataExchange",
+    "Win32_System_Memory",
+]
