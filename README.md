@@ -1,6 +1,6 @@
 # 4dy Client
 
-A lightweight native desktop wrapper for the 3CX web client. Built with [Tauri 2](https://tauri.app/) and [Svelte 5](https://svelte.dev/), it hosts your existing 3CX web client in a real Windows window and adds the quality-of-life features that the official PWA is missing — primarily global hotkeys, system tray integration, smart window positioning for incoming calls, and a `tel:` link handler.
+A lightweight native desktop wrapper for the 3CX web client. Built with [Tauri 2](https://tauri.app/) and [Svelte 5](https://svelte.dev/), it hosts your existing 3CX web client in a real Windows window and adds the quality-of-life features that the official PWA is missing: global hotkeys, system tray integration, smart window positioning for incoming calls, and a `tel:` link handler.
 
 > *Independent third-party tool. Not affiliated with, endorsed by, or sponsored by 3CX Ltd. "3CX" is a registered trademark of 3CX Ltd. and is used here only to describe compatibility.*
 
@@ -62,7 +62,7 @@ libs/i18n/               Shared translations
 
 Grab the latest `.msi` or `.exe` from the [Releases page](https://github.com/hilman2/4dy-client/releases) and run it.
 
-> **Heads up: SmartScreen will yell at you.** The installers are not code-signed — there's no budget for a code-signing certificate on a free custom client. Windows therefore shows an "unrecognized app" / "unknown publisher" warning on first launch. Click **More info** → **Run anyway** to proceed.
+> **Heads up: SmartScreen will yell at you.** The installers are not code-signed (no budget for a code-signing certificate on a free custom client). Windows therefore shows an "unrecognized app" / "unknown publisher" warning on first launch. Click **More info** → **Run anyway** to proceed.
 >
 > Every release lists SHA256 checksums for all artifacts in the release notes. If you want to verify the download before running it:
 >

@@ -1,10 +1,10 @@
-# update-deps.ps1 — local replacement for the heavy parts of Dependabot.
+# update-deps.ps1: local replacement for the heavy parts of Dependabot.
 #
 # Bumps Cargo and npm dependencies inside the version constraints from
 # the manifests, runs every test suite, and prints a diff of the lock
 # files plus an outdated report so you can decide on major bumps.
 #
-# Major version bumps still need a manual edit of the manifest — run
+# Major version bumps still need a manual edit of the manifest. Run
 # `cargo upgrade` (cargo-edit) or `npx npm-check-updates -u` for that.
 #
 # Usage:  pwsh scripts/update-deps.ps1

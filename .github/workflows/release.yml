@@ -95,17 +95,17 @@ jobs:
           foreach ($f in $files) {
             $hash = (Get-FileHash -Path $f.FullName -Algorithm SHA256).Hash.ToLower()
             Write-Host "$($f.Name)  $hash"
-            $checksumLines += '- `' + $f.Name + '` — `' + $hash + '`'
+            $checksumLines += '- `' + $f.Name + '`: `' + $hash + '`'
           }
 
           $header = @(
             'Automated build of `${{ github.ref_name }}`.'
             ''
             '**Installers**'
-            '- `.msi` — Windows Installer'
-            '- `.exe` — NSIS installer'
+            '- `.msi`: Windows Installer'
+            '- `.exe`: NSIS installer'
             ''
-            '> **Not code-signed.** Windows SmartScreen will warn on first run — click **More info** -> **Run anyway**. See the README for details.'
+            '> **Not code-signed.** Windows SmartScreen will warn on first run. Click **More info** -> **Run anyway**. See the README for details.'
             ''
             '**SHA256 checksums**'
             ''

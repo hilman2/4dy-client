@@ -1,6 +1,6 @@
 # Contributing
 
-Thanks for taking a look. This is a small Windows-only Tauri/Rust project — the goal here is to keep it lean and easy to maintain, not to grow a framework.
+Thanks for taking a look. This is a small Windows-only Tauri/Rust project. The goal here is to keep it lean and easy to maintain, not to grow a framework.
 
 ## Ground rules
 
@@ -51,7 +51,7 @@ For major version bumps (anything beyond what `cargo update` / `npm update` will
 
 - Rust: `cargo fmt` (default rustfmt config) and clippy must pass with `-D warnings`.
 - TypeScript/Svelte: keep it simple, no enforced linter beyond what Vite/Svelte do out of the box.
-- Comments in code are in English. Existing files have a few German comments — that's fine, leave them, but new comments should be English.
+- Comments in code are in English. Existing files have a few German comments, that's fine, leave them, but new comments should be English.
 
 ## Pull requests
 

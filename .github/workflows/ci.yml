@@ -45,7 +45,7 @@ jobs:
 
       # Tauri's build script verifies that every entry in `externalBin`
       # exists on disk. For unit tests we don't need real sidecars, just
-      # files that exist — empty placeholders are enough.
+      # files that exist: empty placeholders are enough.
       - name: Stage placeholder sidecars
         if: matrix.needs_sidecars
         shell: pwsh

@@ -1,4 +1,4 @@
-/// CSP-Override – passt die Content Security Policy der gehosteten Seite an,
+/// CSP-Override: passt die Content Security Policy der gehosteten Seite an,
 /// damit Tauri-IPC (ipc.localhost, tauri.localhost) funktioniert.
 /// Muss als ALLERERSTER initialization_script laufen.
 pub fn get_csp_override() -> String {
@@ -51,12 +51,12 @@ pub fn get_csp_override() -> String {
     .to_string()
 }
 
-/// Notification-Polyfill – wird als ZWEITES initialization_script geladen,
+/// Notification-Polyfill: wird als ZWEITES initialization_script geladen,
 /// BEVOR irgendein Page-Script läuft. Ersetzt die Web Notification API komplett,
 /// da WebView2 sie standardmäßig blockiert.
 pub fn get_notification_polyfill() -> String {
     r#"
-// Notification-Polyfill für WebView2 – läuft vor allen Page-Scripts
+// Notification-Polyfill für WebView2: läuft vor allen Page-Scripts
 (function() {
   'use strict';
 
@@ -175,11 +175,11 @@ pub fn get_notification_polyfill() -> String {
     } catch(e) {}
   }
 
-  // PushManager patchen – WebView2 unterstützt kein Push API,
+  // PushManager patchen: WebView2 unterstützt kein Push API,
   // aber 3CX braucht es für Benachrichtigungen
   try {
     if (typeof PushManager !== 'undefined') {
-      // WebView2 unterstützt kein Push – wir liefern eine realistisch
+      // WebView2 unterstützt kein Push: wir liefern eine realistisch
       // aussehende Subscription, damit 3CX den User als "online" führt.
       // Push-Nachrichten werden nicht zugestellt (Endpoint ist fake),
       // aber Notifications laufen über unsere eigene Injection.
@@ -280,7 +280,7 @@ pub fn get_injection_script() -> String {
   console.log('[4dy] Injection wird geladen...');
 
   // ============================================================
-  // SELEKTOREN – bei 3CX-Updates hier anpassen
+  // SELEKTOREN: bei 3CX-Updates hier anpassen
   // Strategie: ARIA/data-Attribute > Textinhalt > Struktur
   // ============================================================
   const SEL = {{
@@ -345,7 +345,7 @@ pub fn get_injection_script() -> String {
   }}
 
   // ============================================================
-  // DIALER – Nummer wählen, Annehmen, Auflegen
+  // DIALER: Nummer wählen, Annehmen, Auflegen
   // ============================================================
   window.__4DY_DIAL = function(number) {{
     const input = findElement(SEL.dialpad.input);
@@ -396,7 +396,7 @@ pub fn get_injection_script() -> String {
   }};
 
   // ============================================================
-  // ANRUFLISTE – Checkboxen + Bulk-Delete
+  // ANRUFLISTE: Checkboxen + Bulk-Delete
   // Injiziert Checkboxen in jeden Eintrag und eine Toolbar
   // ============================================================
   function setupCallHistoryBulkDelete() {{
@@ -625,7 +625,7 @@ pub fn get_injection_script() -> String {
   // ANRUFERKENNUNG via 3CX CRM-Integration
   // Statt DOM-Scraping nutzen wir die eingebaute CRM-Integration:
   // 3CX ruft bei Klingeln eine URL auf mit %CallerNumber% und
-  // %CallerDisplayName% – wir fangen sie hier ab.
+  // %CallerDisplayName%, wir fangen sie hier ab.
   //
   // Konfiguration in 3CX: Optionen → Integration →
   //   "Kontakt in personalisiertem CRM öffnen"

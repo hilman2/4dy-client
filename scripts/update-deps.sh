@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 #
-# update-deps.sh — local replacement for the heavy parts of Dependabot.
+# update-deps.sh: local replacement for the heavy parts of Dependabot.
 #
 # Bumps Cargo and npm dependencies inside the version constraints from
 # the manifests, runs every test suite, and prints a diff of the lock
 # files plus an outdated report so you can decide on major bumps.
 #
-# Major version bumps still need a manual edit of the manifest — run
+# Major version bumps still need a manual edit of the manifest. Run
 # `cargo upgrade` (cargo-edit) or `npx npm-check-updates -u` for that.
 #
 # Usage:  bash scripts/update-deps.sh
@@ -64,7 +64,7 @@ for crate in "${cargo_crates[@]}"; do
 done
 
 if [ $failed -ne 0 ]; then
-  err "    one or more checks failed — review the output above"
+  err "    one or more checks failed, review the output above"
   exit 1
 fi
 ok "    all tests + fmt green"
@@ -93,5 +93,5 @@ if [ -n "$diff_files" ]; then
   echo "Suggested next step:"
   echo "  git add -A && git commit -m 'chore(deps): bump dependencies' && git push"
 else
-  echo "Nothing changed — your dependencies were already up to date."
+  echo "Nothing changed. Your dependencies were already up to date."
 fi

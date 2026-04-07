@@ -40,7 +40,7 @@ describe("SELECTORS", () => {
   it("each selector is parsable as a comma-separated query selector list", () => {
     // jsdom is the test environment, so document.querySelector exists.
     // querySelector throws SyntaxError on invalid CSS, which is what we want
-    // to catch here — typo'd selectors must fail at test time, not at runtime.
+    // to catch here: typo'd selectors must fail at test time, not at runtime.
     const collect = (obj) =>
       Object.values(obj).flatMap((v) =>
         typeof v === "string" ? [v] : collect(v),

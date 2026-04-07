@@ -1,5 +1,5 @@
 /**
- * Web-Client JS-Injection – Einstiegspunkt
+ * Web-Client JS-Injection: Einstiegspunkt
  * Wird nach vollständigem Laden des Web-Clients ausgeführt.
  */
 import { SELECTORS } from './selectors.js';
